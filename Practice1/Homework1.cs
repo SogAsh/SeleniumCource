@@ -12,7 +12,26 @@ namespace Practice1
     {
         private IWebDriver driver;
         private WebDriverWait wait;
-
+        
+        private static By cookie = By.ClassName("cookie-policy__button");
+        private static By book = By.CssSelector(".top-link-menu .b-header-b-menu-e-text");
+        private static By books = By.CssSelector(".b-menu-second-item a[href='/books/']");
+        private static By addToBasket = By.CssSelector(".products-row-action a.btn-primary[data-position='1']");
+        private static By checkout = By.CssSelector(".products-row-action .btn-more");
+        private static By beginCheckout = By.CssSelector("#basket-default-begin-order");
+        private static By сourier = By.CssSelector(".b-radio-delivery-courier > .b-radio-e-bg");
+        private static By city = By.CssSelector(".js-district");
+        private static By wrongCity = By.CssSelector(".responsive-children .b-form-e-row-m-district .b-form-error-e-text");
+        private static By chooseCity = By.CssSelector(".suggests-item-txt");
+        private static By street = By.CssSelector(".js-street-suggests");
+        private static By chooseStreet = By.CssSelector("#suggest-undefined");
+        private static By house = By.CssSelector(".js-gpscheck.b-form-input-m-short");
+        private static By corp = By.CssSelector(".js-corp");
+        private static By flat = By.CssSelector(".js-flat");
+        private static By housePhone = By.CssSelector(".b-form-input-m-tight");
+        private static By date = By.CssSelector("tr td:nth-child(2) .ui-state-default[href='#']");
+        private static By done = By.CssSelector("[value='Готово']");
+        
         [SetUp]
         public void SetUp()
         {
@@ -43,7 +62,7 @@ namespace Practice1
              * начать оформление (синяя) +
              * курьерская доставка галочки +
              * Вбить неверный город и увидеть ошибку "Неизвестный город"
-             * проверка текста                                                          
+             * проверка текста                       //??????????????????????????                                   
              * Вбить верный город +  
              * Выбрать выпадашку +
              * Заполняем улицу +
@@ -53,53 +72,29 @@ namespace Practice1
              * Проверка отсутствия большого ЛБ курьерской доставки ,т.е. найти локатор ЛБ ??????????????????????
              */
             
-            var cookie = driver.FindElement(By.ClassName("cookie-policy__button"));
-            cookie.Click();
-            var book = driver.FindElement(By.CssSelector("span > a[href='/books/']"));
-            Actions action = new Actions(driver);
-            action.MoveToElement(book);
+            driver.FindElement(cookie).Click();
+            var action = new Actions(driver);
+            action.MoveToElement(driver.FindElement(book));
             action.Perform();
-            var books = driver.FindElement(By.CssSelector("li.b-menu-second-item a[href='/books/']"));
-            books.Click();
-            var addToBasket = driver.FindElement(By.CssSelector(".products-row-action [data-idtov='496161']"));
-            addToBasket.Click();
-            var checkout = driver.FindElement(By.CssSelector(".products-row-action .btn-more"));
-            checkout.Click();
-            var beginCheckout = driver.FindElement(By.CssSelector("#basket-default-begin-order"));
-            beginCheckout.Click();
-            var сourier = driver.FindElement(By.CssSelector(".b-radio-delivery-courier > .b-radio-e-bg"));
-            сourier.Click();
-            var city = driver.FindElement(By.CssSelector(".js-district"));
-            city.Click();
-            city.SendKeys("dfgfgfg");
-            city.SendKeys(Keys.Enter);
-            var wrongCity = driver.FindElement(By.CssSelector(".responsive-children .b-form-e-row-m-district .b-form-error-e-text"));
-            // wrongCity.Text.Should().Be("Неизвестный город"); //??????????????????????????
-            city.Clear();
-            city.SendKeys("Екатеринбург");
-            var chooseCity = driver.FindElement(By.CssSelector(".suggests-item-txt"));
-            chooseCity.Click();
-            var street = driver.FindElement(By.CssSelector(".js-street-suggests"));
-            street.Click();
-            street.SendKeys("Малопрудная ул.");
-            var chooseStreet = driver.FindElement(By.CssSelector("#suggest-undefined"));
-            chooseStreet.Click();
-            var house = driver.FindElement(By.CssSelector(".js-gpscheck.b-form-input-m-short"));
-            house.Click();
-            house.SendKeys("5");
-            var corp = driver.FindElement(By.CssSelector(".js-corp"));
-            corp.Click();
-            corp.SendKeys("1");
-            var flat = driver.FindElement(By.CssSelector(".js-flat"));
-            flat.Click();
-            flat.SendKeys("1");
-            var intercom = driver.FindElement(By.CssSelector(".b-form-input-m-tight"));
-            intercom.Click();
-            intercom.SendKeys("1");
-            var date = driver.FindElement(By.CssSelector("tr:nth-of-type(5) [href='#']"));
-            date.Click();
-            var done = driver.FindElement(By.CssSelector("[value='Готово']"));
-            done.Click();
+            driver.FindElement(books).Click();
+            driver.FindElement(addToBasket).Click();
+            driver.FindElement(checkout).Click();
+            driver.FindElement(beginCheckout).Click();
+            driver.FindElement(сourier).Click();
+            driver.FindElement(city).SendKeys("dfgfgfg");
+            driver.FindElement(city).SendKeys(Keys.Enter);
+            //driver.FindElement(wrongCity).Text.Should().Be("Неизвестный город"); //??????????????????????????
+            driver.FindElement(city).Clear();
+            driver.FindElement(city).SendKeys("Екатеринбург");
+            driver.FindElement(chooseCity).Click();
+            driver.FindElement(street).SendKeys("Малопрудная ул.");
+            driver.FindElement(chooseStreet).Click();
+            driver.FindElement(house).SendKeys("5");
+            driver.FindElement(corp).SendKeys("1");
+            driver.FindElement(flat).SendKeys("1");
+            driver.FindElement(housePhone).SendKeys("1");
+            driver.FindElement(date).Click();
+            driver.FindElement(done).Click();
             var expressDeliveryLightbox = driver.FindElement(By.CssSelector(".responsive-children .b-dlform-inner"));
         }
     }
