@@ -29,7 +29,6 @@ namespace Practice1
         private static By corp = By.CssSelector(".js-corp");
         private static By flat = By.CssSelector(".js-flat");
         private static By housePhone = By.CssSelector(".b-form-input-m-tight");
-        private static By date = By.CssSelector("tr td:nth-child(2) .ui-state-default[href='#']");
         private static By done = By.CssSelector("[value='Готово']");
         
         [SetUp]
@@ -93,7 +92,8 @@ namespace Practice1
             driver.FindElement(corp).SendKeys("1");
             driver.FindElement(flat).SendKeys("1");
             driver.FindElement(housePhone).SendKeys("1");
-            driver.FindElement(date).Click();
+            (driver as IJavaScriptExecutor).ExecuteScript(
+                $"$('.js-dlform-wrap .js-delivery-date').datepicker('setDate','{DateTime.Today.AddDays(8).ToString("dd.MM.yyyy")}')");
             driver.FindElement(done).Click();
             var expressDeliveryLightbox = driver.FindElement(By.CssSelector(".responsive-children .b-dlform-inner"));
             //Проверка отсутствия большого ЛБ курьерской доставки
