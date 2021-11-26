@@ -16,7 +16,7 @@ namespace Practice1
         private static By cookie = By.ClassName("cookie-policy__button");
         private static By book = By.CssSelector(".top-link-menu .b-header-b-menu-e-text");
         private static By books = By.CssSelector(".b-menu-second-item a[href='/books/']");
-        private static By addToBasket = By.CssSelector(".products-row-action a.btn-primary[data-position='1']");
+        private static By addToBasket = By.CssSelector("a.btn-primary[data-position='1']");
         private static By checkout = By.CssSelector(".products-row-action .btn-more");
         private static By beginCheckout = By.CssSelector("#basket-default-begin-order");
         private static By сourier = By.CssSelector(".b-radio-delivery-courier > .b-radio-e-bg");
@@ -40,7 +40,7 @@ namespace Practice1
             driver = new ChromeDriver(options);
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            driver.Navigate().GoToUrl("https://www.labirint.ru/books/");
+            driver.Navigate().GoToUrl("https://www.labirint.ru/");
         }
 
         [TearDown]
@@ -96,6 +96,7 @@ namespace Practice1
             driver.FindElement(date).Click();
             driver.FindElement(done).Click();
             var expressDeliveryLightbox = driver.FindElement(By.CssSelector(".responsive-children .b-dlform-inner"));
+            //Проверка отсутствия большого ЛБ курьерской доставки
         }
     }
 }
