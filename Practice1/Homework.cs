@@ -6,31 +6,12 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using FluentAssertions;
 
-namespace Practice1
+namespace Practice1 
 {
-    public class Homework1
+    public class Homework : DataBase
     {
         private IWebDriver driver;
         private WebDriverWait wait;
-
-        private static By cookie = By.ClassName("cookie-policy__button");
-        private static By book = By.CssSelector(".top-link-menu .b-header-b-menu-e-text");
-        private static By books = By.CssSelector(".b-menu-second-item a[href='/books/']");
-        private static By addToBasket = By.CssSelector("a.btn-primary[data-position='1']");
-        private static By checkout = By.CssSelector(".products-row-action .btn-more");
-        private static By beginCheckout = By.CssSelector("#basket-default-begin-order");
-        private static By сourier = By.CssSelector(".b-radio-delivery-courier > .b-radio-e-bg");
-        private static By city = By.CssSelector(".js-district");
-        private static By wrongCity = By.CssSelector(".responsive-children .b-form-e-row-m-district .b-form-error-e-text");
-        private static By chooseCity = By.CssSelector(".suggests-item-txt");
-        private static By street = By.CssSelector(".js-street-suggests");
-        private static By chooseStreet = By.CssSelector("#suggest-undefined");
-        private static By house = By.CssSelector(".js-gpscheck.b-form-input-m-short");
-        private static By corp = By.CssSelector(".js-corp");
-        private static By flat = By.CssSelector(".js-flat");
-        private static By housePhone = By.CssSelector(".b-form-input-m-tight");
-        private static By done = By.CssSelector("[value='Готово']");
-        private static By expressDeliveryLightbox = By.CssSelector(".responsive-modal[style*='display: none']");
 
         [SetUp]
         public void SetUp()
@@ -51,7 +32,7 @@ namespace Practice1
         }
 
         [Test]
-        public void ChechLocatorsInPractice1()
+        public void OrderBook_ShouldSuccess()
         {
             driver.FindElement(cookie).Click();
             var action = new Actions(driver);
@@ -90,7 +71,7 @@ namespace Practice1
             {
                 driver.FindElement(element);
             }
-            catch (NoSuchElementException e)
+            catch (NoSuchElementException)
             {
                 return false;
             }

@@ -67,7 +67,8 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Homework1.cs" />
+        <Compile Include="DataBase.cs" />
+        <Compile Include="Homework.cs" />
         <Compile Include="SeleniumTests.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
