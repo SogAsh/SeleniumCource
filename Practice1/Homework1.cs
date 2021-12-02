@@ -12,7 +12,7 @@ namespace Practice1
     {
         private IWebDriver driver;
         private WebDriverWait wait;
-        
+
         private static By cookie = By.ClassName("cookie-policy__button");
         private static By book = By.CssSelector(".top-link-menu .b-header-b-menu-e-text");
         private static By books = By.CssSelector(".b-menu-second-item a[href='/books/']");
@@ -30,7 +30,8 @@ namespace Practice1
         private static By flat = By.CssSelector(".js-flat");
         private static By housePhone = By.CssSelector(".b-form-input-m-tight");
         private static By done = By.CssSelector("[value='Готово']");
-        
+        private static By expressDeliveryLightbox = By.CssSelector(".responsive-modal[style*='display: none']");
+
         [SetUp]
         public void SetUp()
         {
@@ -38,7 +39,7 @@ namespace Practice1
             options.AddArgument("--start-maximized");
             driver = new ChromeDriver(options);
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(6);
             driver.Navigate().GoToUrl("https://www.labirint.ru/");
         }
 
@@ -48,41 +49,24 @@ namespace Practice1
             driver.Quit();
             driver = null;
         }
-        
+
         [Test]
         public void ChechLocatorsInPractice1()
         {
-            /*
-             * В режиме инкогнито принять куки +
-             * Книги + 
-             * Все книги +
-             * Любую первую книгу - добавить в корзину +
-             * оформить +
-             * начать оформление (синяя) +
-             * курьерская доставка галочки +
-             * Вбить неверный город и увидеть ошибку "Неизвестный город"
-             * проверка текста                       //??????????????????????????                                   
-             * Вбить верный город +  
-             * Выбрать выпадашку +
-             * Заполняем улицу +
-             * дом, строение кв, домофон +
-             * Выбираем дату +
-             * Готово +
-             * Проверка отсутствия большого ЛБ курьерской доставки ,т.е. найти локатор ЛБ ??????????????????????
-             */
-            
             driver.FindElement(cookie).Click();
             var action = new Actions(driver);
             action.MoveToElement(driver.FindElement(book));
             action.Perform();
             driver.FindElement(books).Click();
+            Assert.IsTrue(driver.Title.Contains("Купить книги через интернет магазин, заказать книги почтой по интернету | Лабиринт"),
+                "не перешли на страницу");
             driver.FindElement(addToBasket).Click();
             driver.FindElement(checkout).Click();
             driver.FindElement(beginCheckout).Click();
             driver.FindElement(сourier).Click();
             driver.FindElement(city).SendKeys("dfgfgfg");
-            driver.FindElement(city).SendKeys(Keys.Enter);
-            //driver.FindElement(wrongCity).Text.Should().Be("Неизвестный город"); //??????????????????????????
+            driver.FindElement(city).SendKeys(Keys.Tab);
+            driver.FindElement(wrongCity).Text.Should().Be("Неизвестный город");
             driver.FindElement(city).Clear();
             driver.FindElement(city).SendKeys("Екатеринбург");
             driver.FindElement(chooseCity).Click();
@@ -95,8 +79,22 @@ namespace Practice1
             (driver as IJavaScriptExecutor).ExecuteScript(
                 $"$('.js-dlform-wrap .js-delivery-date').datepicker('setDate','{DateTime.Today.AddDays(8).ToString("dd.MM.yyyy")}')");
             driver.FindElement(done).Click();
-            var expressDeliveryLightbox = driver.FindElement(By.CssSelector(".responsive-children .b-dlform-inner"));
-            //Проверка отсутствия большого ЛБ курьерской доставки
+
+            var checkLightboxDisplayed = existsElement(expressDeliveryLightbox);
+            checkLightboxDisplayed.Should().BeTrue();
+        }
+
+        private bool existsElement(By element)
+        {
+            try
+            {
+                driver.FindElement(element);
+            }
+            catch (NoSuchElementException e)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
