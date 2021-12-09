@@ -22,5 +22,6 @@ namespace Practice1
         public static By housePhone = By.CssSelector(".b-form-input-m-tight");
         public static By done = By.CssSelector("[value='Готово']");
         public static By expressDeliveryLightbox = By.CssSelector(".responsive-modal[style*='display: none']");
+        public static By loadingpanel = By.CssSelector(".loading-panel");
     }
 }
