@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Globalization;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
-using FluentAssertions;
+using SeleniumExtras.WaitHelpers;
 
 namespace Practice1 
 {
@@ -35,19 +36,21 @@ namespace Practice1
         public void OrderBook_ShouldSuccess()
         {
             driver.FindElement(cookie).Click();
+            
             var action = new Actions(driver);
             action.MoveToElement(driver.FindElement(book));
             action.Perform();
-            Assert.IsTrue(driver.FindElement(books).Displayed);
+
+            wait.Until(ExpectedConditions.ElementIsVisible(books));
             driver.FindElement(books).Click();
-            Assert.IsTrue(driver.Url.Contains("https://www.labirint.ru/books/"));
+            Assert.IsTrue(driver.Url.Contains("https://www.labirint.ru/books/"), "Переход на страницу 'Книги' не произошел");
             driver.FindElement(addToBasket).Click();
             driver.FindElement(checkout).Click();
             driver.FindElement(beginCheckout).Click();
             driver.FindElement(сourier).Click();
             driver.FindElement(city).SendKeys("dfgfgfg");
             driver.FindElement(city).SendKeys(Keys.Tab);
-            Assert.AreEqual("Неизвестный город", driver.FindElement(wrongCity).Text);
+            Assert.AreEqual("Неизвестный город", driver.FindElement(wrongCity).Text, "Название элемента не совпадает с 'Неизвестный город'");
             driver.FindElement(city).Clear();
             driver.FindElement(city).SendKeys("Екатеринбург ");
             driver.FindElement(chooseCity).Click();
@@ -58,31 +61,15 @@ namespace Practice1
             driver.FindElement(flat).SendKeys("1");
             driver.FindElement(housePhone).SendKeys("1");
             
-            var loadgpanel = existsElement(loadingpanel);
-            loadgpanel.Should().BeFalse(); //не понимаю почему падает, если пройтись дебагом, то будет false, а если просто run test, то true
+            wait.Until(ExpectedConditions.InvisibilityOfElementLocated(loadingpanel));
             
             (driver as IJavaScriptExecutor).ExecuteScript(
-                $"$('.js-dlform-wrap .js-delivery-date').datepicker('setDate','{DateTime.Today.AddDays(3).ToString("dd.MM.yyyy")}')");
-            //дата 12.02.2021 ставится правильно, но потом скидывается обратно на 11 число
+                $"$('.js-dlform-wrap .js-delivery-date').datepicker('setDate','{DateTime.Now.AddDays(3).ToString("d", DateTimeFormatInfo.InvariantInfo)}')");
             
+            wait.Until(ExpectedConditions.InvisibilityOfElementLocated(loadingpanel));
             driver.FindElement(done).Click();
-            loadgpanel.Should().BeFalse(); 
             
-            var checkLightboxDisplayed = existsElement(expressDeliveryLightbox);
-            checkLightboxDisplayed.Should().BeTrue();
-        }
-
-        private bool existsElement(By element)
-        {
-            try
-            {
-                driver.FindElement(element);
-            }
-            catch (NoSuchElementException)
-            {
-                return false;
-            }
-            return true;
+            Assert.IsFalse(driver.FindElement(expressDeliveryLightbox).Displayed, "ЛБ курьерской доставки отображается");
         }
     }
 }

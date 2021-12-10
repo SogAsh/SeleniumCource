@@ -1,5 +1,5 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1921bf4b_002D4d56_002D43e4_002D9651_002D1fb33ed394b0/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CheckTransitionToVkipedia #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1921bf4b_002D4d56_002D43e4_002D9651_002D1fb33ed394b0/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CheckTransitionToVkipedia #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;And&gt;&#xD;
     &lt;TestAncestor&gt;&#xD;
       &lt;TestId&gt;NUnit3x::21153B61-D8B6-4E8C-80FF-FEEF283E9375::.NETFramework,Version=v4.7.2::Practice1.SeleniumTests.CheckTransitionToVkipedia&lt;/TestId&gt;&#xD;
@@ -22,10 +22,23 @@
     &lt;TestId&gt;NUnit3x::21153B61-D8B6-4E8C-80FF-FEEF283E9375::.NETFramework,Version=v4.7.2::Practice1.SeleniumTests.CheckTransitionToVkipedia&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=72d0bf81_002Dcdda_002D4fa6_002Db34f_002D9000f8adeb9d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CheckTransitionToVkipedia" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::21153B61-D8B6-4E8C-80FF-FEEF283E9375::.NETFramework,Version=v4.7.2::Practice1.SeleniumTests.CheckTransitionToVkipedia&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=72d0bf81_002Dcdda_002D4fa6_002Db34f_002D9000f8adeb9d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CheckTransitionToVkipedia" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Or&gt;&#xD;
+    &lt;And&gt;&#xD;
+      &lt;TestAncestor&gt;&#xD;
+        &lt;TestId&gt;NUnit3x::21153B61-D8B6-4E8C-80FF-FEEF283E9375::.NETFramework,Version=v4.7.2::Practice1.SeleniumTests.CheckTransitionToVkipedia&lt;/TestId&gt;&#xD;
+        &lt;TestId&gt;NUnit3x::21153B61-D8B6-4E8C-80FF-FEEF283E9375::.NETFramework,Version=v4.7.2::Practice1.Homework.OrderBook_ShouldSuccess&lt;/TestId&gt;&#xD;
+      &lt;/TestAncestor&gt;&#xD;
+      &lt;Not&gt;&#xD;
+        &lt;TestAncestor&gt;&#xD;
+          &lt;TestId&gt;NUnit3x::21153B61-D8B6-4E8C-80FF-FEEF283E9375::.NETFramework,Version=v4.7.2::Practice1.SeleniumTests&lt;/TestId&gt;&#xD;
+        &lt;/TestAncestor&gt;&#xD;
+      &lt;/Not&gt;&#xD;
+    &lt;/And&gt;&#xD;
+    &lt;TestAncestor&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::21153B61-D8B6-4E8C-80FF-FEEF283E9375::.NETFramework,Version=v4.7.2::TestLibrary.LabirintTests.LabirintTest&lt;/TestId&gt;&#xD;
+    &lt;/TestAncestor&gt;&#xD;
+  &lt;/Or&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=750c62f5_002D65e3_002D43e7_002D9bb3_002D07aaacf2e489/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CheckTransitionToVkipedia #5" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
