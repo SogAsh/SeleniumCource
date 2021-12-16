@@ -9,7 +9,7 @@ namespace Practice1
         [Test]
         public void BasketPage_EnterInvalidCity_ErrorCity()
         {
-            PrepairArrange();
+            AddBook();
 
             //act
             var courierPage = new CourierDeliveryLightbox(driver, wait);
@@ -22,7 +22,7 @@ namespace Practice1
         [Test]
         public void BasketPage_FillAll_Success()
         {
-            PrepairArrange();
+            AddBook();
 
             //act
             var courierPage = new CourierDeliveryLightbox(driver, wait);
@@ -35,7 +35,7 @@ namespace Practice1
             Assert.IsFalse(courierPage.IsVisibleLightbox(), "ЛБ курьерской доставки отображается");
         }
 
-        private void PrepairArrange()
+        private void AddBook()
         {
             //arrange
             var homePage = new HomePage(driver, wait);
