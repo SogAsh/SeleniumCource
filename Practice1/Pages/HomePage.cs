@@ -43,13 +43,7 @@ namespace Practice1.Pages
             driver.FindElement(addToBasket).Click();
             driver.FindElement(checkout).Click();
             driver.FindElement(newYearLightbox).Click();
-            Assert.IsFalse(IsVisibleNewYearLightbox(), "ЛБ курьерской доставки отображается");
             driver.FindElement(beginCheckout).Click();
-        }
-        
-        public bool IsVisibleNewYearLightbox()
-        {
-            return driver.FindElement(newYearLightbox).Displayed;
         }
     }
 }
