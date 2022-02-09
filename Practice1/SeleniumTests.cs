@@ -1,60 +1,49 @@
-﻿using System;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
+﻿using NUnit.Framework;
+using Practice1.Pages;
 
 namespace Practice1
 {
-    public class SeleniumTests
+    [TestFixture]
+    public class SeleniumTests : SeleniumTestBase
     {
-        private IWebDriver driver;
-        private WebDriverWait wait;
-
-        [SetUp]
-        public void SetUp()
+        [Test]
+        public void BasketPage_EnterInvalidCity_ErrorCity()
         {
-            var options = new ChromeOptions();
-            options.AddArgument("--start-maximized");
-            driver = new ChromeDriver(options);
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-        }
+            AddBook();
 
-        [TearDown]
-        public void TearDown()
-        {
-            driver.Quit();
-            driver = null;
+            //act
+            var courierPage = new CourierDeliveryLightbox(driver, wait);
+            courierPage.EnterCity("ddddd", false);
+
+            //assert
+            Assert.IsTrue(courierPage.IsVisibleErrorCity(), "Не появилась ошибка о неизвестном городе");
         }
 
         [Test]
-        public void CheckTransitionToVkipedia()
+        public void BasketPage_FillAll_Success()
         {
-            driver.Navigate().GoToUrl("https://ru.wikipedia.org/");
-            IWebElement queryInput = driver.FindElement(By.Name("search")); //явное ожидание, для ожидания всего всего
-            IWebElement searchButton = driver.FindElement(By.Name("go")); //неявное ожидание, для ожидания появление элемента на странице
-            // не нужно прописывать в матодах
+            AddBook();
 
-            queryInput.SendKeys("Selenium");
-            searchButton.Click();
+            //act
+            var courierPage = new CourierDeliveryLightbox(driver, wait);
+            courierPage.EnterCity("Екатеринбург", true);
+            courierPage.AddAdress("Малопрудная ул.", "5", "1", "1", "1");
+            courierPage.SetDate();
+            courierPage.Confirm();
 
-            Assert.IsTrue(driver.Title.Contains("Selenium — Википедия"), "не перешли на страницу");
-            Assert.AreEqual("Selenium — Википедия", driver.Title, "не перешли на страницу");
+            //assert
+            Assert.IsFalse(courierPage.IsVisibleLightbox(), "ЛБ курьерской доставки отображается");
         }
 
-        [Test]
-        public void Locators()
+        private void AddBook()
         {
-            driver.Navigate().GoToUrl("https://www.labirint.ru/guestbook/");
+            //arrange
+            var homePage = new HomePage(driver, wait);
+            homePage.OpenPage();
+            homePage.AddBookToCard();
 
-            var input = driver.FindElement(By.Id("search-field"));
-            var block = driver.FindElements(By.ClassName("b-rfooter-e-item"));
-            var search = driver.FindElement(By.Name("searchformadvanced"));
-            var allGoods = driver.FindElement(By.CssSelector(".sorting-items.sorting-active"));
-            var years = driver.FindElements(By.CssSelector("select[name='year_begin'] option:not([selected])"));
-            var linkText = driver.FindElement(By.LinkText("Как сделать заказ"));
-            var link = driver.FindElement(By.CssSelector("[data-event-content = 'Как сделать заказ']"));
+            var basketPage = new BasketPage(driver, wait);
+            basketPage.ChooseCourierDelivery();
         }
     }
 }
