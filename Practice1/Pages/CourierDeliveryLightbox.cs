@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
@@ -58,6 +59,8 @@ namespace Practice1.Pages
         {
             driver.FindElement(city).Clear();
             driver.FindElement(city).SendKeys(nameCity);
+            var value = driver.FindElement(city).GetAttribute("value");
+            Assert.AreEqual(nameCity, value);
 
             if (validCity)
             {
