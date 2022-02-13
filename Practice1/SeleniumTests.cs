@@ -11,11 +11,9 @@ namespace Practice1
         {
             AddBook();
 
-            //act
             var courierPage = new CourierDeliveryLightbox(driver, wait);
             courierPage.EnterCity("ddddd", false);
 
-            //assert
             Assert.IsTrue(courierPage.IsVisibleErrorCity(), "Не появилась ошибка о неизвестном городе");
         }
 
@@ -24,20 +22,17 @@ namespace Practice1
         {
             AddBook();
 
-            //act
             var courierPage = new CourierDeliveryLightbox(driver, wait);
             courierPage.EnterCity("Екатеринбург", true);
             courierPage.AddAdress("Малопрудная ул.", "5", "1", "1", "1");
             courierPage.SetDate();
             courierPage.Confirm();
 
-            //assert
             Assert.IsFalse(courierPage.IsVisibleLightbox(), "ЛБ курьерской доставки отображается");
         }
 
         private void AddBook()
         {
-            //arrange
             var homePage = new HomePage(driver, wait);
             homePage.OpenPage();
             homePage.AddBookToCard();
