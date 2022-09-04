@@ -7,7 +7,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Practice1
 {
-    public abstract class SeleniumTestBase
+    public abstract class TestBase
     {
         protected IWebDriver driver;
         protected WebDriverWait wait;

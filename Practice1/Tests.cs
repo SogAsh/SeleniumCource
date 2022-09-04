@@ -4,7 +4,7 @@ using Practice1.Pages;
 namespace Practice1
 {
     [TestFixture]
-    public class SeleniumTests : SeleniumTestBase
+    public class Tests : TestBase
     {
         [Test]
         public void BasketPage_EnterInvalidCity_ErrorCity()
